@@ -22,5 +22,5 @@ public class Member extends BaseEntity {
     /* 연관관계 */
     @ManyToMany()
     @JoinTable(name = "member_organization")
-    private List<Organization> organizationList = new ArrayList<>();
+    private List<Organization> organizations = new ArrayList<>();
 }

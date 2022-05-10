@@ -17,6 +17,6 @@ public class Organization extends BaseEntity {
     private String name;
 
     /* 연관관계 */
-    @ManyToMany(mappedBy = "organizationList")
-    private List<Member> memberList = new ArrayList<>();
+    @ManyToMany(mappedBy = "organizations")
+    private List<Member> members = new ArrayList<>();
 }
