@@ -1,7 +1,7 @@
 package com.comeet.organization;
 
 import com.comeet.common.entities.BaseEntity;
-import com.comeet.member.Member;
+import com.comeet.member.entity.Member;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;

@@ -1,7 +1,7 @@
 package com.comeet.commit;
 
 import com.comeet.common.entities.BaseEntity;
-import com.comeet.member.Member;
+import com.comeet.member.entity.Member;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;

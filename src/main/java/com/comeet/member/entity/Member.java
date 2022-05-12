@@ -1,4 +1,4 @@
-package com.comeet.member;
+package com.comeet.member.entity;
 
 import com.comeet.common.entities.BaseEntity;
 import com.comeet.organization.Organization;
@@ -23,4 +23,12 @@ public class Member extends BaseEntity {
     @ManyToMany()
     @JoinTable(name = "member_organization")
     private List<Organization> organizations = new ArrayList<>();
+
+    public static Member of(String nickname, String githubId) {
+
+        Member member = new Member();
+        member.nickname = nickname;
+        member.githubId = githubId;
+        return member;
+    }
 }
