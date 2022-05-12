@@ -20,6 +20,16 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
+
+    /* 로그인 관련 */
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    /* jwt 관련 */
+    implementation "com.auth0:java-jwt:$javaJwtVersion"
+
+    /* model validation 관련 */
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
