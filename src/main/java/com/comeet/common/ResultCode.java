@@ -14,8 +14,8 @@ public enum ResultCode {
     MEMBER_NOT_FOUND("사용자가 존재하지 않습니다."),
     MEMBER_NICKNAME_ALREADY_EXIST("이미 존재하는 닉네임입니다."),
 
-    // partner (파트너)
-    PARTNER_NOT_FOUND("파트너가 존재하지 않습니다.");
+    // github (깃헙)
+    Github_USER_NOT_FOUND("사용자가 존재하지 않습니다.");
 
     private final String message;
 
