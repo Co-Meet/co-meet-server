@@ -15,7 +15,10 @@ public enum ResultCode {
     MEMBER_NICKNAME_ALREADY_EXIST("이미 존재하는 닉네임입니다."),
 
     // github (깃헙)
-    Github_USER_NOT_FOUND("사용자가 존재하지 않습니다.");
+    Github_USER_NOT_FOUND("사용자가 존재하지 않습니다."),
+
+    // organization (오거니제이션)
+    ORGANIZATION_NOT_FOUND("사용자가 존재하지 않습니다.");
 
     private final String message;
 
