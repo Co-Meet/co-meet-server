@@ -13,6 +13,7 @@ import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
@@ -72,6 +73,8 @@ public class ApiControllerAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiResponse<?> handleNotFoundException(NotFoundException e) {
         log.info("handleNotFoundException: {}", e.getMessage(), e);
+        System.out.println("pass");
+
         return ApiResponse.failure(e.getResultCode());
     }
 

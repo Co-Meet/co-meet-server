@@ -3,10 +3,7 @@ package com.comeet.config.security;
 import com.comeet.common.ApiResponse;
 import com.comeet.common.ResultCode;
 import com.comeet.config.jwt.JwtService;
-import com.comeet.member.repository.MemberRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
-
+import com.comeet.member.service.MemberService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -16,20 +13,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.RequiredArgsConstructor;
+
 @RequiredArgsConstructor
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String MEMBER_ROLE_NAME = "MEMBER";
 
     private final ObjectMapper objectMapper;
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
     private final JwtService jwtService;
 
     @Override
@@ -52,10 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/api/v1/**")
             .authorizeRequests()
-            .antMatchers("/api/v1/members/check-github/**").permitAll()
-            .antMatchers("/api/v1/members/check-nickname/**").permitAll()
             .antMatchers("/api/v1/members/join").permitAll()
             .antMatchers("/api/v1/members/login").permitAll()
+            .antMatchers("/api/v1/members/check-nickname/**").permitAll()
+            .antMatchers("/api/v1/members/check-github/**").permitAll()
             .anyRequest().hasAuthority(MEMBER_ROLE_NAME);
         http.cors().configurationSource(corsConfigurationSource());
         http.csrf().disable();
@@ -64,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().disable();
         http.requestCache().disable();
         http.addFilterAt(tokenPreAuthFilter(), AbstractPreAuthenticatedProcessingFilter.class);
-        http.sessionManagement().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.exceptionHandling()
             .authenticationEntryPoint((request, response, authException) -> {
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -94,7 +96,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     PreAuthTokenProvider preAuthTokenProvider() {
         return new PreAuthTokenProvider(
-            memberRepository,
+            memberService,
             jwtService
         );
     }
@@ -112,5 +114,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 }
