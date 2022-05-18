@@ -67,6 +67,9 @@ dependencies {
     /* json parse 관련 */
     implementation "com.googlecode.json-simple:json-simple:$jsonSimpleVersion"
 
+    /* jasypt 관련 */
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:$jasyptVersion"
+
     /* Rest Docs 관련 */
     asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
