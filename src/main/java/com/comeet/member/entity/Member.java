@@ -1,6 +1,7 @@
 package com.comeet.member.entity;
 
 import com.comeet.common.entities.BaseEntity;
+import com.comeet.member.exception.MemberAlreadyAddedOrganization;
 import com.comeet.organization.entity.Organization;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +35,7 @@ public class Member extends BaseEntity {
 
     public void addOrganization(Organization organization) {
         if (this.organizations.contains(organization)) {
-            /**
-             * TODO 이미 있는 그룹이라고 에러 핸들링 할지 고민
-             */
-            return;
+            throw new MemberAlreadyAddedOrganization();
         }
         this.organizations.add(organization);
         organization.getMembers().add(this);

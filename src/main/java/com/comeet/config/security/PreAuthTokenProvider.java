@@ -3,9 +3,8 @@ package com.comeet.config.security;
 import com.comeet.config.jwt.JwtService;
 import com.comeet.config.security.exception.TokenMissingException;
 import com.comeet.member.entity.Member;
-import com.comeet.member.repository.MemberRepository;
+import com.comeet.member.service.MemberService;
 import java.util.Collections;
-import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -13,10 +12,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 
+import lombok.RequiredArgsConstructor;
+
 @RequiredArgsConstructor
 public class PreAuthTokenProvider implements AuthenticationProvider {
 
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
     private final JwtService jwtService;
 
     @Override
@@ -25,8 +26,7 @@ public class PreAuthTokenProvider implements AuthenticationProvider {
         if (authentication instanceof PreAuthenticatedAuthenticationToken) {
             String token = authentication.getPrincipal().toString();
             Long memberId = jwtService.decode(token);
-            // TODO: 멤버 조회 실패하는 경우, AuthenticationException 으로 예외번역
-            Member member = memberRepository.getById(memberId);
+            Member member = memberService.findMemberById(memberId);
             return new PreAuthenticatedAuthenticationToken(
                 member.getId(),
                 "",
@@ -41,5 +41,4 @@ public class PreAuthTokenProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         return PreAuthenticatedAuthenticationToken.class.isAssignableFrom(authentication);
     }
-
 }

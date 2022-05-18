@@ -4,6 +4,7 @@ import com.comeet.config.jwt.JwtService;
 import com.comeet.member.entity.Member;
 import com.comeet.member.exception.GithubUserNotFoundException;
 import com.comeet.member.exception.MemberNotFoundException;
+import com.comeet.member.exception.NicknameAlreadyExistsException;
 import com.comeet.member.model.request.JoinRequestDto;
 import com.comeet.member.model.request.LoginRequestDto;
 import com.comeet.member.model.response.GetOrganizationOfMemberDto;
@@ -31,7 +32,7 @@ public class MemberService {
 
     public String checkNickname(String nickname) {
         if (memberRepository.existsByNickname(nickname)) {
-            throw new GithubUserNotFoundException();
+            throw new NicknameAlreadyExistsException();
         } else {
             return "사용가능한 닉네임입니다.";
         }

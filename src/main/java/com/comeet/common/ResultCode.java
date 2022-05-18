@@ -13,6 +13,7 @@ public enum ResultCode {
     // member (사용자)
     MEMBER_NOT_FOUND("사용자가 존재하지 않습니다."),
     MEMBER_NICKNAME_ALREADY_EXIST("이미 존재하는 닉네임입니다."),
+    MEMBER_ALREADY_ADDED_ORGANIZATION("사용자는 이미 해당 오거니제이션에 소속되어 있습니다."),
 
     // github (깃헙)
     Github_USER_NOT_FOUND("해당 깃허브 아이디를 사용하는 사용자가 존재하지 않습니다."),

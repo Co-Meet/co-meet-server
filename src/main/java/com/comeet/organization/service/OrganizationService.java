@@ -9,7 +9,6 @@ import com.comeet.organization.model.request.AddMemberRequestDto;
 import com.comeet.organization.model.request.CreateOrganizationRequestDto;
 import com.comeet.organization.model.response.OrganizationInfoResponseDto;
 import com.comeet.organization.repository.OrganizationRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,6 +43,7 @@ public class OrganizationService {
             organization.getMembers());
     }
 
+    @Transactional
     public OrganizationInfoResponseDto addMember(Long id, AddMemberRequestDto addMemberRequestDto) {
         Member member = memberRepository.findByNickname(addMemberRequestDto.getNickname())
             .orElseThrow(MemberNotFoundException::new);
