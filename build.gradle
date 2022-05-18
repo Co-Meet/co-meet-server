@@ -34,7 +34,7 @@ dependencies {
     implementation "org.kohsuke:github-api:$githubApiVersion"
 
     /* json parse 관련 */
-    implementation "com.googlecode.json-simple:json-simple$jsonSimpleVersion"
+    implementation "com.googlecode.json-simple:json-simple:$jsonSimpleVersion"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
