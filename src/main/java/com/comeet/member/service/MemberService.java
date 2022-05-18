@@ -49,10 +49,10 @@ public class MemberService {
         RestTemplate restTemplate = new RestTemplate();
 
         Map<String, Object> params = new HashMap<>();
-        params.put("githubId", githubId);
+        params.put("id", githubId);
         try {
             restTemplate.getForObject(githubUrl + "/{id}", Object.class,
-                githubId);
+                params);
             return "해당 깃허브 아이디를 사용하는 유저가 존재합니다.";
         } catch (HttpStatusCodeException e) {
             throw new GithubUserNotFoundException();
@@ -74,11 +74,14 @@ public class MemberService {
         return new LoginResponseDto(jwtService.encode(member.getId()));
     }
 
-
     public MemberInfoResponseDto getMemberInfo(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
         return new MemberInfoResponseDto(member.getId(), member.getNickname(),
             member.getGithubId());
+    }
+
+    public Member findMemberById(Long id) {
+        return memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
     }
 
     /**
