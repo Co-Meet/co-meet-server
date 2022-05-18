@@ -44,9 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/**",
                 "/v1/api-docs",
                 "/h2-console/**",
-                "/api/v1/hello",
-                "/api/v1/check-github/**",
-                "/api/v1/check-nickname/**"
+                "/api/v1/hello"
             );
     }
 
@@ -54,6 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/api/v1/**")
             .authorizeRequests()
+            .antMatchers("/api/v1/members/check-github/**").permitAll()
+            .antMatchers("/api/v1/members/check-nickname/**").permitAll()
             .antMatchers("/api/v1/members/join").permitAll()
             .antMatchers("/api/v1/members/login").permitAll()
             .anyRequest().hasAuthority(MEMBER_ROLE_NAME);
