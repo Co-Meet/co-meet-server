@@ -30,9 +30,9 @@ public class OrganizationService {
         Member member = memberRepository.findById(memberId)
             .orElseThrow(MemberNotFoundException::new);
 
-        Organization organization = Organization.of(createOrganizationRequestDto.getName(),
-            (List<Member>) member);
-        organizationRepository.save(organization);
+        Organization organization = Organization.of(createOrganizationRequestDto.getName());
+        organization = organizationRepository.save(organization);
+        member.addOrganization(organization);
         return new OrganizationInfoResponseDto(organization.getId(), organization.getName(),
             organization.getMembers());
     }
