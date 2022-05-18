@@ -44,7 +44,7 @@ public class MemberController {
         return ApiResponse.success(memberService.login(loginRequestDto));
     }
 
-    @PostMapping("/organizations")
+    @GetMapping("/organizations")
     public ApiResponse<GetOrganizationOfMemberDto> getOrganizationOfMember(
         @ModelAttribute("memberId") Long memberId) {
         return ApiResponse.success(memberService.getOrganizationOfMember(memberId));
