@@ -58,8 +58,6 @@ public class ApiControllerAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiResponse<?> handleNotFoundException(NotFoundException e) {
         log.info("handleNotFoundException: {}", e.getMessage(), e);
-        System.out.println("pass");
-
         return ApiResponse.failure(e.getResultCode());
     }
 
