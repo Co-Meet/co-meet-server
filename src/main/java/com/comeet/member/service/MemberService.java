@@ -1,6 +1,7 @@
 package com.comeet.member.service;
 
 import com.comeet.config.jwt.JwtService;
+import com.comeet.config.security.SecurityUtil;
 import com.comeet.member.entity.Member;
 import com.comeet.member.exception.GithubUserNotFoundException;
 import com.comeet.member.exception.MemberNotFoundException;
@@ -71,8 +72,9 @@ public class MemberService {
         return new LoginResponseDto(jwtService.encode(member.getId()));
     }
 
-    public MemberInfoResponseDto getMemberInfo(Long id) {
-        Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
+    public MemberInfoResponseDto getMemberInfo() {
+        Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
+            .orElseThrow(MemberNotFoundException::new);
         return new MemberInfoResponseDto(member.getId(), member.getNickname(),
             member.getGithubId());
     }
@@ -85,8 +87,9 @@ public class MemberService {
      * TODO 멤버 정보 수정
      */
 
-    public GetOrganizationOfMemberDto getOrganizationOfMember(Long id) {
-        Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
+    public GetOrganizationOfMemberDto getOrganizationOfMember() {
+        Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
+            .orElseThrow(MemberNotFoundException::new);
         return new GetOrganizationOfMemberDto(member.getOrganizations());
     }
 

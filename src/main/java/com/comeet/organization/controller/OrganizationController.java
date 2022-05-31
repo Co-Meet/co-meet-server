@@ -24,10 +24,9 @@ public class OrganizationController {
 
     @PostMapping()
     public ApiResponse<OrganizationInfoResponseDto> createOrganization(
-        @RequestBody CreateOrganizationRequestDto createOrganizationRequestDto,
-        @ModelAttribute("memberId") Long memberId) {
+        @RequestBody CreateOrganizationRequestDto createOrganizationRequestDto) {
         return ApiResponse.success(
-            organizationService.createOrganization(createOrganizationRequestDto, memberId));
+            organizationService.createOrganization(createOrganizationRequestDto));
     }
 
     @GetMapping("/{id}")
