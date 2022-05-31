@@ -11,6 +11,7 @@ configurations {
 
 ext {
     snippetsDir = file('build/generated-snippets')
+    set('springCloudVersion', "2021.0.1")
 }
 
 test {
@@ -64,6 +65,9 @@ dependencies {
     /* github commit 관련 */
     implementation "org.kohsuke:github-api:$githubApiVersion"
 
+    /* FeignClient 관련 */
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+
     /* json parse 관련 */
     implementation "com.googlecode.json-simple:json-simple:$jsonSimpleVersion"
 
@@ -74,6 +78,12 @@ dependencies {
     asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+    }
 }
 
 tasks.named('test') {
