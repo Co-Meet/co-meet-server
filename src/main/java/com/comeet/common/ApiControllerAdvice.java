@@ -6,14 +6,10 @@ import com.comeet.common.exceptions.InternalServerErrorException;
 import com.comeet.common.exceptions.NotFoundException;
 import com.comeet.common.exceptions.ServiceUnavailableException;
 import com.comeet.common.exceptions.UnauthorizedException;
-import java.security.Principal;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
