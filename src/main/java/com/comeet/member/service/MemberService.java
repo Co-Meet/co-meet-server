@@ -2,6 +2,8 @@ package com.comeet.member.service;
 
 import com.comeet.config.jwt.JwtService;
 import com.comeet.config.security.SecurityUtil;
+import com.comeet.github.GithubFeignService;
+import com.comeet.github.model.response.GithubUserResponseDto;
 import com.comeet.member.entity.Member;
 import com.comeet.member.exception.GithubUserNotFoundException;
 import com.comeet.member.exception.MemberNotFoundException;
@@ -30,6 +32,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final JwtService jwtService;
+    private final GithubFeignService githubFeignService;
 
     public String checkNickname(String nickname) {
         if (memberRepository.existsByNickname(nickname)) {
@@ -40,21 +43,8 @@ public class MemberService {
     }
 
     public String checkGithubId(String githubId) {
-        /**
-         * TODO 외부 API 호출은 추후 리팩토링
-         */
-        String githubUrl = "https://api.github.com/users";
-        RestTemplate restTemplate = new RestTemplate();
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("id", githubId);
-        try {
-            restTemplate.getForObject(githubUrl + "/{id}", Object.class,
-                params);
-            return "해당 깃허브 아이디를 사용하는 유저가 존재합니다.";
-        } catch (HttpStatusCodeException e) {
-            throw new GithubUserNotFoundException();
-        }
+        githubFeignService.getGithubUser(githubId);
+        return githubId + "를(을) 사용하는 유저가 존재합니다.";
     }
 
     @Transactional
