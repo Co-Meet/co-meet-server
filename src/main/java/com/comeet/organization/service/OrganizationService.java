@@ -1,5 +1,6 @@
 package com.comeet.organization.service;
 
+import com.comeet.config.security.SecurityUtil;
 import com.comeet.member.entity.Member;
 import com.comeet.member.exception.MemberNotFoundException;
 import com.comeet.member.repository.MemberRepository;
@@ -25,10 +26,9 @@ public class OrganizationService {
 
     @Transactional
     public OrganizationInfoResponseDto createOrganization(
-        CreateOrganizationRequestDto createOrganizationRequestDto, Long memberId) {
-        Member member = memberRepository.findById(memberId)
+        CreateOrganizationRequestDto createOrganizationRequestDto) {
+        Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
             .orElseThrow(MemberNotFoundException::new);
-
         Organization organization = Organization.of(createOrganizationRequestDto.getName());
         organization = organizationRepository.save(organization);
         member.addOrganization(organization);

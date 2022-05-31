@@ -2,6 +2,8 @@ package com.comeet.commit.service;
 
 import com.comeet.commit.entity.Commit;
 import com.comeet.commit.repository.CommitRepository;
+import com.comeet.github.GithubFeignService;
+import com.comeet.github.model.response.GithubCommitsResponseDto;
 import com.comeet.member.entity.Member;
 import com.comeet.member.exception.GithubUserNotFoundException;
 import com.comeet.member.service.MemberService;
@@ -26,35 +28,22 @@ public class CommitService {
 
     private final CommitRepository commitRepository;
     private final MemberService memberService;
+    private final GithubFeignService githubFeignService;
 
     @Transactional
     public Long getMemberCommits(Long memberId) {
         Member member = memberService.findMemberById(memberId);
         String githubId = member.getGithubId();
+        GithubCommitsResponseDto githubCommitsResponseDto = githubFeignService.getGithubCommits(
+            githubId);
 
-        String githubUrl = "https://api.github.com/search/commits?q=author:{author} committer-date:{committer-date}";
-        RestTemplate restTemplate = new RestTemplate();
-        Map<String, Object> params = new HashMap<>();
-        params.put("author", githubId);
-        params.put("committer-date", LocalDate.now(ZoneId.of("Asia/Seoul")));
-        try {
-            String result = restTemplate.getForObject(githubUrl, String.class, params);
-            JSONParser parser = new JSONParser();
-            Object obj = parser.parse(result);
-            JSONObject jsonObj = (JSONObject) obj;
-
-            Long commitCount = (Long) jsonObj.get("total_count");
-
-            if (!commitRepository.existsByMember(member)) {
-                Commit commit = Commit.of(commitCount, member);
-                commitRepository.save(commit);
-            }
-            Commit commit = commitRepository.findByMember(member);
-            commit.updateCount(commitCount);
-
-            return commitCount;
-        } catch (ParseException e) {
-            throw new GithubUserNotFoundException();
+        Long commitCount = githubCommitsResponseDto.getTotal_count();
+        if (!commitRepository.existsByMember(member)) {
+            Commit commit = Commit.of(commitCount, member);
+            commitRepository.save(commit);
         }
+        Commit commit = commitRepository.findByMember(member);
+        commit.updateCount(commitCount);
+        return commitCount;
     }
 }

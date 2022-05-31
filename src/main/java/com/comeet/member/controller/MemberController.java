@@ -45,14 +45,12 @@ public class MemberController {
     }
 
     @GetMapping("/organizations")
-    public ApiResponse<GetOrganizationOfMemberDto> getOrganizationOfMember(
-        @ModelAttribute("memberId") Long memberId) {
-        return ApiResponse.success(memberService.getOrganizationOfMember(memberId));
+    public ApiResponse<GetOrganizationOfMemberDto> getOrganizationOfMember() {
+        return ApiResponse.success(memberService.getOrganizationOfMember());
     }
 
     @GetMapping("/me")
-    public ApiResponse<MemberInfoResponseDto> getMyInfo(
-        @ModelAttribute("memberId") Long memberId) {
-        return ApiResponse.success(memberService.getMemberInfo(memberId));
+    public ApiResponse<MemberInfoResponseDto> getMyInfo() {
+        return ApiResponse.success(memberService.getMemberInfo());
     }
 }
