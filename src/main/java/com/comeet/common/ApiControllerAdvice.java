@@ -23,17 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestControllerAdvice
 public class ApiControllerAdvice {
 
-    @ModelAttribute("memberId")
-    public Long resolveMemberId(Principal principal) {
-        if (principal == null) {
-            return null;
-        }
-        if (principal instanceof PreAuthenticatedAuthenticationToken) {
-            return (Long) ((PreAuthenticatedAuthenticationToken) principal).getPrincipal();
-        }
-        return null;
-    }
-
     @ExceptionHandler(HttpMediaTypeException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiResponse<?> handleHttpMediaTypeException(HttpMediaTypeException e) {
