@@ -17,5 +17,5 @@ public interface GithubFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/search/commits?q=author:{author} committer-date:{committerDate}")
     GithubCommitsResponseDto getGithubCommits(@PathVariable("author") String author,
-        @PathVariable("committerDate") LocalDate committerDate);
+        @PathVariable("committerDate") String committerDate);
 }

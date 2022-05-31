@@ -22,7 +22,7 @@ public class GithubFeignService {
     }
 
     public GithubCommitsResponseDto getGithubCommits(String author) {
-        LocalDate committerDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
+        String committerDate = LocalDate.now(ZoneId.of("Asia/Seoul")).toString();
         return githubFeignClient.getGithubCommits(author, committerDate);
     }
 }
