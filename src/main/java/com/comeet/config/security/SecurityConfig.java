@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/v1/members/join").permitAll()
             .antMatchers("/api/v1/members/login").permitAll()
             .antMatchers("/api/v1/members/check-nickname/**").permitAll()
-            .antMatchers("/api/v1/members/check-github/**").permitAll()
+제            .antMatchers("/api/v1/members/check-githubId/**").permitAll()
             .anyRequest().hasAuthority(MEMBER_ROLE_NAME);
         http.cors().configurationSource(corsConfigurationSource());
         http.csrf().disable();
