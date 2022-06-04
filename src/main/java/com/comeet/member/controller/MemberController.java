@@ -29,7 +29,7 @@ public class MemberController {
         return ApiResponse.success(memberService.checkNickname(nickname));
     }
 
-    @GetMapping("/check-github/{githubId}")
+    @GetMapping("/check-githubId/{githubId}")
     public ApiResponse<String> checkGithubId(@PathVariable String githubId) {
         return ApiResponse.success(memberService.checkGithubId(githubId));
     }
