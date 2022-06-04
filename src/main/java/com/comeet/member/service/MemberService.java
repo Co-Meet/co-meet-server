@@ -58,7 +58,6 @@ public class MemberService {
     public LoginResponseDto login(LoginRequestDto logInRequestDto) {
         Member member = memberRepository.findByNickname(logInRequestDto.getNickname())
             .orElseThrow(MemberNotFoundException::new);
-
         return new LoginResponseDto(jwtService.encode(member.getId()));
     }
 
