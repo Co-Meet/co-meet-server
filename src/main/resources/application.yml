@@ -1,16 +1,3 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/co_meet?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
-    password: root
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-        default_batch_fetch_size: 100
-jwt:
-  secretKey: secretKey
+  profiles:
+    default: local
