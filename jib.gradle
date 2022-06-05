@@ -1,0 +1,28 @@
+apply plugin: "com.google.cloud.tools.jib"
+
+jib {
+    from {
+        image = "adoptopenjdk/openjdk16:alpine"
+    }
+    to {
+        image = "121223358129.dkr.ecr.ap-northeast-2.amazonaws.com/${project.name}"
+        tags = ["${buildPhase}"]
+    }
+    container {
+        String profile = "-Dspring.profiles.active=${buildPhase.toString()}"
+        String encryptor = "-Djasypt.encryptor.password=${encryptorPassword.toString()}"
+        creationTime = "USE_CURRENT_TIMESTAMP"
+        jvmFlags = [
+                profile,
+                encryptor,
+                "-Dlogging.file.path=/logs",
+                "-Dserver.tomcat.accesslog.enabled=true",
+                "-Dserver.tomcat.basedir=",
+                "-XX:+UseContainerSupport",
+                "-Dserver.port=8080",
+                "-Dfile.encoding=UTF-8",
+                "-Duser.timezone=Asia/Seoul"
+        ]
+        ports = ["8080"]
+    }
+}
