@@ -8,7 +8,7 @@ import com.comeet.organization.entity.Organization;
 import com.comeet.organization.exception.OrganizationNotFoundException;
 import com.comeet.organization.model.request.AddMemberRequestDto;
 import com.comeet.organization.model.request.CreateOrganizationRequestDto;
-import com.comeet.organization.model.response.OrganizationInfoResponseDto;
+import com.comeet.organization.model.response.OrganizationResponseDto;
 import com.comeet.organization.repository.OrganizationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,26 +25,27 @@ public class OrganizationService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public OrganizationInfoResponseDto createOrganization(
+    public OrganizationResponseDto createOrganization(
         CreateOrganizationRequestDto createOrganizationRequestDto) {
         Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
             .orElseThrow(MemberNotFoundException::new);
         Organization organization = Organization.of(createOrganizationRequestDto.getName());
         organization = organizationRepository.save(organization);
         member.addOrganization(organization);
-        return new OrganizationInfoResponseDto(organization.getId(), organization.getName(),
+        return new OrganizationResponseDto(organization.getId(), organization.getName(),
             organization.getMembers());
     }
 
-    public OrganizationInfoResponseDto getOrganizationInfo(Long id) {
+    public OrganizationResponseDto getOrganization(Long id) {
         Organization organization = organizationRepository.findById(id)
             .orElseThrow(OrganizationNotFoundException::new);
-        return new OrganizationInfoResponseDto(organization.getId(), organization.getName(),
+        return new OrganizationResponseDto(organization.getId(), organization.getName(),
             organization.getMembers());
     }
 
     @Transactional
-    public OrganizationInfoResponseDto addMember(Long id, AddMemberRequestDto addMemberRequestDto) {
+    public OrganizationResponseDto addMemberToOrganization(Long id,
+        AddMemberRequestDto addMemberRequestDto) {
         Member member = memberRepository.findByNickname(addMemberRequestDto.getNickname())
             .orElseThrow(MemberNotFoundException::new);
 
@@ -52,7 +53,7 @@ public class OrganizationService {
             .orElseThrow(OrganizationNotFoundException::new);
 
         member.addOrganization(organization);
-        return new OrganizationInfoResponseDto(organization.getId(), organization.getName(),
+        return new OrganizationResponseDto(organization.getId(), organization.getName(),
             organization.getMembers());
     }
 }

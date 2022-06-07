@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class GetOrganizationOfMemberDto {
+public class GetMyOrganizationResponseDto {
 
     List<Organization> organizationList;
 }

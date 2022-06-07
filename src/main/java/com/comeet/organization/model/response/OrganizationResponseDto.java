@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class OrganizationInfoResponseDto {
+public class OrganizationResponseDto {
 
     private Long id;
 

@@ -3,11 +3,10 @@ package com.comeet.organization.controller;
 import com.comeet.common.ApiResponse;
 import com.comeet.organization.model.request.AddMemberRequestDto;
 import com.comeet.organization.model.request.CreateOrganizationRequestDto;
-import com.comeet.organization.model.response.OrganizationInfoResponseDto;
+import com.comeet.organization.model.response.OrganizationResponseDto;
 import com.comeet.organization.service.OrganizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,23 +22,23 @@ public class OrganizationController {
     private final OrganizationService organizationService;
 
     @PostMapping()
-    public ApiResponse<OrganizationInfoResponseDto> createOrganization(
+    public ApiResponse<OrganizationResponseDto> createOrganization(
         @RequestBody CreateOrganizationRequestDto createOrganizationRequestDto) {
         return ApiResponse.success(
             organizationService.createOrganization(createOrganizationRequestDto));
     }
 
     @GetMapping("/{id}")
-    public ApiResponse<OrganizationInfoResponseDto> getOrganizationInfo(
+    public ApiResponse<OrganizationResponseDto> getOrganization(
         @PathVariable Long id) {
-        return ApiResponse.success(organizationService.getOrganizationInfo(id));
+        return ApiResponse.success(organizationService.getOrganization(id));
     }
 
     @PatchMapping("/{id}")
-    public ApiResponse<OrganizationInfoResponseDto> addMember(
+    public ApiResponse<OrganizationResponseDto> addMemberToOrganization(
         @PathVariable Long id,
         @RequestBody AddMemberRequestDto addMemberRequestDto) {
         return ApiResponse.success(
-            organizationService.addMember(id, addMemberRequestDto));
+            organizationService.addMemberToOrganization(id, addMemberRequestDto));
     }
 }
