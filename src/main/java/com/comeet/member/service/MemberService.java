@@ -3,26 +3,20 @@ package com.comeet.member.service;
 import com.comeet.config.jwt.JwtService;
 import com.comeet.config.security.SecurityUtil;
 import com.comeet.github.GithubFeignService;
-import com.comeet.github.model.response.GithubUserResponseDto;
 import com.comeet.member.entity.Member;
-import com.comeet.member.exception.GithubUserNotFoundException;
 import com.comeet.member.exception.MemberNotFoundException;
 import com.comeet.member.exception.NicknameAlreadyExistsException;
 import com.comeet.member.model.request.JoinRequestDto;
 import com.comeet.member.model.request.LoginRequestDto;
-import com.comeet.member.model.response.GetOrganizationOfMemberDto;
+import com.comeet.member.model.response.GetMyOrganizationResponseDto;
 import com.comeet.member.model.response.JoinResponseDto;
 import com.comeet.member.model.response.LoginResponseDto;
-import com.comeet.member.model.response.MemberInfoResponseDto;
+import com.comeet.member.model.response.MemberResponseDto;
 import com.comeet.member.repository.MemberRepository;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 @Transactional(readOnly = true)
@@ -61,10 +55,10 @@ public class MemberService {
         return new LoginResponseDto(jwtService.encode(member.getId()));
     }
 
-    public MemberInfoResponseDto getMemberInfo() {
+    public MemberResponseDto getMemberInfo() {
         Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
             .orElseThrow(MemberNotFoundException::new);
-        return new MemberInfoResponseDto(member.getId(), member.getNickname(),
+        return new MemberResponseDto(member.getId(), member.getNickname(),
             member.getGithubId());
     }
 
@@ -76,10 +70,10 @@ public class MemberService {
      * TODO 멤버 정보 수정
      */
 
-    public GetOrganizationOfMemberDto getOrganizationOfMember() {
+    public GetMyOrganizationResponseDto getMyOrganization() {
         Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
             .orElseThrow(MemberNotFoundException::new);
-        return new GetOrganizationOfMemberDto(member.getOrganizations());
+        return new GetMyOrganizationResponseDto(member.getOrganizations());
     }
 
     // 기타 validation 로직은 private 함수로 빼기

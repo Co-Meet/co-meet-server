@@ -3,14 +3,13 @@ package com.comeet.member.controller;
 import com.comeet.common.ApiResponse;
 import com.comeet.member.model.request.JoinRequestDto;
 import com.comeet.member.model.request.LoginRequestDto;
-import com.comeet.member.model.response.GetOrganizationOfMemberDto;
+import com.comeet.member.model.response.GetMyOrganizationResponseDto;
 import com.comeet.member.model.response.JoinResponseDto;
 import com.comeet.member.model.response.LoginResponseDto;
-import com.comeet.member.model.response.MemberInfoResponseDto;
+import com.comeet.member.model.response.MemberResponseDto;
 import com.comeet.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,12 +44,12 @@ public class MemberController {
     }
 
     @GetMapping("/organizations")
-    public ApiResponse<GetOrganizationOfMemberDto> getOrganizationOfMember() {
-        return ApiResponse.success(memberService.getOrganizationOfMember());
+    public ApiResponse<GetMyOrganizationResponseDto> getOrganizationOfMember() {
+        return ApiResponse.success(memberService.getMyOrganization());
     }
 
     @GetMapping("/me")
-    public ApiResponse<MemberInfoResponseDto> getMyInfo() {
+    public ApiResponse<MemberResponseDto> getMyInfo() {
         return ApiResponse.success(memberService.getMemberInfo());
     }
 }
