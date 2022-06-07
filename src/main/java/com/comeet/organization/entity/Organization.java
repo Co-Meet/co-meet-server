@@ -19,7 +19,6 @@ public class Organization extends BaseEntity {
 
     /* 연관관계 */
     @ManyToMany(mappedBy = "organizations")
-    @JsonIgnore
     private List<Member> members = new ArrayList<>();
 
     public static Organization of(String name) {

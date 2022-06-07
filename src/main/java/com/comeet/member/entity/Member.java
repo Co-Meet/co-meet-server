@@ -3,6 +3,7 @@ package com.comeet.member.entity;
 import com.comeet.common.entities.BaseEntity;
 import com.comeet.member.exception.MemberAlreadyAddedOrganization;
 import com.comeet.organization.entity.Organization;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -23,6 +24,7 @@ public class Member extends BaseEntity {
     /* 연관관계 */
     @ManyToMany()
     @JoinTable(name = "member_organization")
+    @JsonIgnore
     private List<Organization> organizations = new ArrayList<>();
 
     public static Member of(String nickname, String githubId) {
