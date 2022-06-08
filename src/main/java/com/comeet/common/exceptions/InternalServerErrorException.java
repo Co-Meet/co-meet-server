@@ -4,11 +4,11 @@ import com.comeet.common.ResultCode;
 
 public class InternalServerErrorException extends CoMeetServerException {
 
-    protected InternalServerErrorException() {
+    public InternalServerErrorException() {
         super(ResultCode.INTERNAL_SERVER_ERROR);
     }
 
-    protected InternalServerErrorException(ResultCode resultCode) {
+    public InternalServerErrorException(ResultCode resultCode) {
         super(resultCode);
     }
 }
