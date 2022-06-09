@@ -8,6 +8,7 @@ import com.comeet.member.exception.MemberNotFoundException;
 import com.comeet.member.exception.NicknameAlreadyExistsException;
 import com.comeet.member.model.request.JoinRequestDto;
 import com.comeet.member.model.request.LoginRequestDto;
+import com.comeet.member.model.request.UpdateGithubIdRequestDto;
 import com.comeet.member.model.response.GetMyOrganizationResponseDto;
 import com.comeet.member.model.response.JoinResponseDto;
 import com.comeet.member.model.response.LoginResponseDto;
@@ -66,9 +67,20 @@ public class MemberService {
         return memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
     }
 
-    /**
-     * TODO 멤버 정보 수정
-     */
+    @Transactional
+    public MemberResponseDto updateGithubId(UpdateGithubIdRequestDto updateGithubIdRequestDto) {
+        Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
+            .orElseThrow(MemberNotFoundException::new);
+        githubFeignService.getGithubUser(updateGithubIdRequestDto.getGithubId());
+
+        memberRepository.updateGithubId(updateGithubIdRequestDto.getGithubId(),
+            member.getId());
+        Member updatedMember = memberRepository.findById(member.getId())
+            .orElseThrow(MemberNotFoundException::new);
+        
+        return new MemberResponseDto(updatedMember.getId(), updatedMember.getNickname(),
+            updatedMember.getGithubId());
+    }
 
     public GetMyOrganizationResponseDto getMyOrganization() {
         Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
