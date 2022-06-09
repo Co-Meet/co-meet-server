@@ -2,6 +2,7 @@ package com.comeet.member.entity;
 
 import com.comeet.common.entities.BaseEntity;
 import com.comeet.member.exception.MemberAlreadyAddedOrganization;
+import com.comeet.member.exception.MemberNotExistsInOrganization;
 import com.comeet.organization.entity.Organization;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
@@ -41,5 +42,13 @@ public class Member extends BaseEntity {
         }
         this.organizations.add(organization);
         organization.getMembers().add(this);
+    }
+
+    public void removeOrganization(Organization organization) {
+        if (!this.organizations.contains(organization)) {
+            throw new MemberNotExistsInOrganization();
+        }
+        this.organizations.remove(organization);
+        organization.getMembers().remove(this);
     }
 }
