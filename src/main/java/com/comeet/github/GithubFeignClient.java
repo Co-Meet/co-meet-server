@@ -3,7 +3,6 @@ package com.comeet.github;
 import com.comeet.config.feign.GithubFeignClientConfig;
 import com.comeet.github.model.response.GithubCommitsResponseDto;
 import com.comeet.github.model.response.GithubUserResponseDto;
-import java.time.LocalDate;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

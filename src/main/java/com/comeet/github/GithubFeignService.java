@@ -2,14 +2,10 @@ package com.comeet.github;
 
 import com.comeet.github.model.response.GithubCommitsResponseDto;
 import com.comeet.github.model.response.GithubUserResponseDto;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

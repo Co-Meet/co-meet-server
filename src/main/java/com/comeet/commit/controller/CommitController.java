@@ -3,7 +3,6 @@ package com.comeet.commit.controller;
 import com.comeet.commit.model.response.GetCommitResponseDto;
 import com.comeet.commit.service.CommitService;
 import com.comeet.common.ApiResponse;
-import com.comeet.github.GithubFeignClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

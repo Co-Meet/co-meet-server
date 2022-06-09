@@ -1,9 +1,6 @@
 package com.comeet.commit.service;
 
-
-import com.comeet.commit.entity.Commit;
 import com.comeet.commit.model.response.GetCommitResponseDto;
-import com.comeet.commit.repository.CommitRepository;
 import com.comeet.common.exceptions.InternalServerErrorException;
 import com.comeet.github.GithubFeignService;
 import com.comeet.github.model.response.GithubCommitsResponseDto;
@@ -24,20 +21,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class CommitService {
 
-    private final CommitRepository commitRepository;
     private final MemberService memberService;
-    private final GithubFeignService githubFeignService;
-
 
     public GetCommitResponseDto getCommit(Long memberId) {
-        return new GetCommitResponseDto(parsingGithubContribution(memberId));
+        return new GetCommitResponseDto(this.parsingGithubContribution(memberId));
     }
 
     private Integer parsingGithubContribution(Long memberId) {
         Member member = memberService.findMemberById(memberId);
         String githubId = member.getGithubId();
-        GithubCommitsResponseDto githubCommitsResponseDto = githubFeignService.getGithubCommits(
-            githubId);
 
         String githubUrl = "https://github.com/" + githubId;
         String attributes = "data-date";

@@ -1,6 +1,5 @@
 package com.comeet.organization.exception;
 
-
 import com.comeet.common.ResultCode;
 import com.comeet.common.exceptions.NotFoundException;
 
