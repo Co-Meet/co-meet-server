@@ -77,7 +77,7 @@ public class MemberService {
             member.getId());
         Member updatedMember = memberRepository.findById(member.getId())
             .orElseThrow(MemberNotFoundException::new);
-        
+
         return new MemberResponseDto(updatedMember.getId(), updatedMember.getNickname(),
             updatedMember.getGithubId());
     }
