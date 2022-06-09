@@ -2,7 +2,6 @@ package com.comeet.organization.entity;
 
 import com.comeet.common.entities.BaseEntity;
 import com.comeet.member.entity.Member;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;

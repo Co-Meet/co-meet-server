@@ -87,6 +87,9 @@ dependencies {
     asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+    /* Crawling 관련 */
+    implementation 'org.jsoup:jsoup:1.13.1'
 }
 
 dependencyManagement {
