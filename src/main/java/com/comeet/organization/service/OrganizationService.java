@@ -56,4 +56,17 @@ public class OrganizationService {
         return new OrganizationResponseDto(organization.getId(), organization.getName(),
             organization.getMembers());
     }
+
+    @Transactional
+    public OrganizationResponseDto removeMemberFromOrganization(Long id) {
+        Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
+            .orElseThrow(MemberNotFoundException::new);
+
+        Organization organization = organizationRepository.findById(id)
+            .orElseThrow(OrganizationNotFoundException::new);
+
+        member.removeOrganization(organization);
+        return new OrganizationResponseDto(organization.getId(), organization.getName(),
+            organization.getMembers());
+    }
 }

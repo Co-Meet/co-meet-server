@@ -34,11 +34,18 @@ public class OrganizationController {
         return ApiResponse.success(organizationService.getOrganization(id));
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/in")
     public ApiResponse<OrganizationResponseDto> addMemberToOrganization(
         @PathVariable Long id,
         @RequestBody AddMemberRequestDto addMemberRequestDto) {
         return ApiResponse.success(
             organizationService.addMemberToOrganization(id, addMemberRequestDto));
+    }
+
+    @PatchMapping("/{id}/out")
+    public ApiResponse<OrganizationResponseDto> removeMemberFromOrganization(
+        @PathVariable Long id) {
+        return ApiResponse.success(
+            organizationService.removeMemberFromOrganization(id));
     }
 }
