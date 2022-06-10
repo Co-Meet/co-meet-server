@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+  <springProfile name="production">
+    <property name="LOG_DIR" value="./logs"/>
+    <property name="LOG_PATH_NAME" value="${LOG_DIR}/spring.log"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <file>${LOG_PATH_NAME}</file>
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>${LOG_PATH_NAME}.%d{yyyyMMdd}</fileNamePattern>
+        <maxHistory>60</maxHistory> <!-- 일자별 백업파일의 보관기간 -->
+      </rollingPolicy>
+      <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F]%M\(%L\) : %m%n</pattern>
+      </encoder>
+    </appender>
+  </springProfile>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <springProfile name="production">
+    <root level="info">
+      <appender-ref ref="FILE"/>
+    </root>
+  </springProfile>
+  <root level="info">
+    <appender-ref ref="CONSOLE"/>
+  </root>
+</configuration>
