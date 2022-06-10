@@ -1,3 +1,5 @@
 spring:
   profiles:
     default: local
+logging:
+  config: classpath:logback/logback-spring.xml
