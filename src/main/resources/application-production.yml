@@ -1,7 +1,7 @@
 spring:
   config:
     activate:
-      on-profile: prod
+      on-profile: production
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ENC(B3LE+HgbhjcIpjGvs3qVTPYrXfDVBpzScghYkKYWGpisRfPPRhq5KGk3u/bd81NtDiKbqG95uoyqtxFGuEmetQMMhoJpkiaOy/sbEtu7uefj30oXS3LVx0GZbyPyJMhpjlDrKjMp+apx22zMoCNQC7f0tKY5VlkFf5twaqWsa9s=)
