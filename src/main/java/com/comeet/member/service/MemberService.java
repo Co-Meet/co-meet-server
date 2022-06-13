@@ -56,7 +56,7 @@ public class MemberService {
         return new LoginResponseDto(jwtService.encode(member.getId()));
     }
 
-    public MemberResponseDto getMemberInfo() {
+    public MemberResponseDto getMyInfo() {
         Member member = memberRepository.findById(SecurityUtil.resolveMemberId())
             .orElseThrow(MemberNotFoundException::new);
         return new MemberResponseDto(member.getId(), member.getNickname(),
