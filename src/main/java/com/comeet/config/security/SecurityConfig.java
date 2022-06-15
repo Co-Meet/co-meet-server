@@ -44,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-ui/**",
                 "/webjars/springfox-swagger-ui/**",
                 "/swagger-resources/**",
-                "/v1/api-docs",
+                "/api/v1/docs/commet.html",
+                "/docs/commet.html",
                 "/h2-console/**",
                 "/api/v1/hello"
             );
@@ -58,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/v1/members/login").permitAll()
             .antMatchers("/api/v1/members/check-nickname/**").permitAll()
             .antMatchers("/api/v1/members/check-githubId/**").permitAll()
+            .antMatchers("*").permitAll()
             .anyRequest().hasAuthority(MEMBER_ROLE_NAME);
         http.cors().configurationSource(corsConfigurationSource());
         http.csrf().disable();
