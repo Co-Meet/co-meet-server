@@ -58,6 +58,6 @@ public class MemberController {
 
     @GetMapping("/me")
     public ApiResponse<MemberResponseDto> getMyInfo() {
-        return ApiResponse.success(memberService.getMemberInfo());
+        return ApiResponse.success(memberService.getMyInfo());
     }
 }

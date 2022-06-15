@@ -1,0 +1,142 @@
+= Rest Docs Sample API Document
+jojoldu.tistory.com
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+[[introduction]]
+== 소개
+
+CoMeet Rest Docs API
+
+[[common]]
+== 공통 사항
+
+API에 관계없이 아래 사항을 지켜주셔야 합니다.
+
+=== Header
+
+|===
+| name | 설명
+
+| `Authorization`
+| API를 사용하기 위한 인증 키
+|===
+
+=== 공통 Response Body
+
+|===
+| field | 설명
+
+| `code`
+| 응답 코드
+
+| `message`
+| 예외사항 내용 등 응답 메세지
+
+| `data`
+| 실제 반환될 데이터
+|===
+
+[[join]]
+== 회원가입 API
+
+=== Request
+
+CURL:
+
+include::{snippets}/member-login/curl-request.adoc[]
+
+Request Parameters:
+
+include::{snippets}/member-login/request-body.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/member-login/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/member-login/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/member-login/http-response.adoc[]
+
+[[login]]
+== 로그인 API
+
+=== Request
+
+CURL:
+
+include::{snippets}/member-login/curl-request.adoc[]
+
+Request Parameters:
+
+include::{snippets}/member-login/request-body.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/member-login/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/member-login/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/member-login/http-response.adoc[]
+
+[[get-my-info]]
+== 내 정보 조회 API
+
+=== Request
+
+CURL:
+
+include::{snippets}/member-get-my-info/curl-request.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/member-get-my-info/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/member-get-my-info/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/member-get-my-info/http-response.adoc[]
+
+[[get-my-organization]]
+== 내가 속한 오거니제이션 조회 API
+
+=== Request
+
+CURL:
+
+include::{snippets}/member-get-my-organization/curl-request.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/member-get-my-organization/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/member-get-my-organization/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/member-get-my-organization/http-response.adoc[]
