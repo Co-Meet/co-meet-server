@@ -44,8 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-ui/**",
                 "/webjars/springfox-swagger-ui/**",
                 "/swagger-resources/**",
-                "/api/v1/docs/commet.html",
-                "/docs/commet.html",
                 "/h2-console/**",
                 "/api/v1/hello"
             );
