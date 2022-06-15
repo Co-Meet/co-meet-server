@@ -48,22 +48,95 @@ API에 관계없이 아래 사항을 지켜주셔야 합니다.
 
 CURL:
 
-include::{snippets}/member-join/curl-request.adoc[]
+include::{snippets}/member-login/curl-request.adoc[]
 
 Request Parameters:
 
-include::{snippets}/member-join/request-body.adoc[]
+include::{snippets}/member-login/request-body.adoc[]
 
 Request HTTP Example:
 
-include::{snippets}/member-join/http-request.adoc[]
+include::{snippets}/member-login/http-request.adoc[]
 
 === Response
 
 Response Fields:
 
-include::{snippets}/member-join/response-fields.adoc[]
+include::{snippets}/member-login/response-fields.adoc[]
 
 Response HTTP Example:
 
-include::{snippets}/member-join/http-response.adoc[]
+include::{snippets}/member-login/http-response.adoc[]
+
+[[login]]
+== 로그인 API
+
+=== Request
+
+CURL:
+
+include::{snippets}/member-login/curl-request.adoc[]
+
+Request Parameters:
+
+include::{snippets}/member-login/request-body.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/member-login/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/member-login/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/member-login/http-response.adoc[]
+
+[[get-my-info]]
+== 내 정보 조회 API
+
+=== Request
+
+CURL:
+
+include::{snippets}/member-get-my-info/curl-request.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/member-get-my-info/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/member-get-my-info/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/member-get-my-info/http-response.adoc[]
+
+[[get-my-organization]]
+== 내가 속한 오거니제이션 조회 API
+
+=== Request
+
+CURL:
+
+include::{snippets}/member-get-my-organization/curl-request.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/member-get-my-organization/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/member-get-my-organization/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/member-get-my-organization/http-response.adoc[]

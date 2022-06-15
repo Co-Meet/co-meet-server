@@ -165,14 +165,14 @@ public class MemberDocumentationTest {
     public void getMyOrganization() throws Exception {
 
         //given
-        Organization organization1 = Organization.of("testOranization1");
+        Organization organization1 = Organization.of("testOranization");
         ReflectionTestUtils.setField(organization1, "id", 1L);
         ReflectionTestUtils.setField(organization1, "createdAt",
             LocalDateTime.parse("2022-02-02T00:00"));
         ReflectionTestUtils.setField(organization1, "updatedAt",
             LocalDateTime.parse("2022-02-02T00:00"));
 
-        Member member1 = Member.of("testNickname1", "testGithubId1");
+        Member member1 = Member.of("testNickname", "testGithubId");
         ReflectionTestUtils.setField(member1, "id", 1L);
         ReflectionTestUtils.setField(member1, "createdAt", LocalDateTime.parse("2022-02-02T00:00"));
         ReflectionTestUtils.setField(member1, "updatedAt", LocalDateTime.parse("2022-02-02T00:00"));
